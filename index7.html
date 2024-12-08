@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domanda Random</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .question-box { border: 1px solid #ccc; padding: 20px; margin: 20px auto; max-width: 600px; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="question-box">
+        <h2 id="question">Caricamento...</h2>
+        <ul id="options" class="options"></ul>
+    </div>
+    <script>
+        fetch("https://script.google.com/macros/s/AKfycbwVDKxp0eIYBqyU9-0WN-zJyqyQHNrRDb0s1qTQ3uwDhkJx0aG1tPyJwJLc4BrpuFaaDg/exec")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("question").textContent = data.domanda;
+
+                const optionsList = document.getElementById("options");
+                data.opzioni.forEach(option => {
+                    const li = document.createElement("li");
+                    li.textContent = option;
+                    optionsList.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Errore:", error));
+    </script>
+</body>
+</html>
